@@ -1,0 +1,254 @@
+{
+  "_task_id": "globus",
+  "_start_urls": [
+    "https://www.globus.ru/catalog/molochnye-produkty-syr-yaytsa/?count=36"
+  ],
+  "_segment": "globus",
+  "_operation": "",
+  "_federal_subject": "",
+  "_source": "globus",
+  "project_id": "metaspider",
+  "spider_id": "metacrawler",
+  "global_settings": {
+    "CONCURRENT_REQUESTS": 256,
+    "SPLASH_URL": "http://0.0.0.0:8050",
+    "LOG_LEVEL": "INFO",
+    "AUTOTHROTTLE_ENABLED": false,
+    "AUTOTHROTTLE_START_DELAY": 1,
+    "AUTOTHROTTLE_MAX_DELAY": 60,
+    "AUTOTHROTTLE_TARGET_CONCURRENCY": 256,
+    "CONCURRENT_REQUESTS_PER_DOMAIN": 256,
+    "RETRY_ENABLED": true,
+    "RETRY_HTTP_CODES": [
+      500,
+      503,
+      502,
+      504,
+      400,
+      403,
+      408,
+      429,
+      505,
+      303,
+      302,
+      301,
+      404,
+      307,
+      410,
+      502,
+      451
+    ],
+    "HTTPERROR_ALLOWED_CODES": [],
+    "RETRY_TIMES": 20,
+    "ROBOTSTXT_ENABLED": false,
+    "ROBOTSTXT_OBEY": false,
+    "REDIRECT_ENABLED": false,
+    "COOKIES_ENABLED": false,
+    "DOWNLOAD_FAIL_ON_DATALOSS": false,
+    "RANDOM_UA_TYPE": "random",
+    "DOWNLOAD_TIMEOUT": 60,
+    "CLOSESPIDER_ITEMCOUNT": 0,
+    "CLOSESPIDER_ERRORCOUNT": 0
+  },
+  "methods": {
+    "crawling_type": "common",
+    "allowed_domains": [],
+    "proxy_settings": {
+      "types": [
+        "https"
+      ],
+      "amount": 10000,
+      "save": false,
+      "headers": {
+        "Cookie": {
+          "type": "string",
+          "value": "globus_hyper_id=75; globus_hyper_name=Щелково"
+        }
+      }
+    }
+  },
+  "crawl_tree": [{
+    "pagination_urls": {
+      "path": "//div[@class='navigation js-navigation']/b/following-sibling::a[1]/@href",
+      "headers": {
+        "Cookie": {
+          "type": "string",
+          "value": "globus_hyper_id=75; globus_hyper_name=Щелково"
+        }
+      }
+    },
+    "item_urls": {
+      "path": "//a[@class='pim-list__item ga-event']/@href",
+      "headers": {
+        "Cookie": {
+          "type": "string",
+          "value": "globus_hyper_id=75; globus_hyper_name=Щелково"
+        }
+      }
+    }
+  }],
+  "item_page": {
+    "fields": {
+      "shop": {
+        "type": "string",
+        "path": "//div[@class='header__link'][2]/div/a/text()"
+      },
+      "address": {
+        "type": "string",
+        "path": "//div[@class='menu-footer__content menu-footer__content-hide']/p[2]/text()"
+      },
+      "product_name": {
+        "type": "string",
+        "path": "//div['catalog-detail__title-mobile']/h1[@class='catalog-detail__title-h1'][1]/text()"
+      },
+      "price_main": {
+        "type": "float",
+        "path": "//span[@class='catalog-detail__item-price-actual-main']/text()"
+      },
+      "price_sub": {
+        "type": "float",
+        "path": "//span[@class='catalog-detail__item-price-actual-sub']/text()"
+      },
+      "brand": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Бренд')]/parent::div/following-sibling::div/span/text()"
+      },
+      "country": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Страна-производитель')]/parent::div/following-sibling::div/span/text()"
+      },
+      "composition": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Состав')]/parent::div/following-sibling::div/span/text()"
+      },
+      "standart": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Стандарт')]/parent::div/following-sibling::div/span/text()"
+      },
+      "raw_type": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Тип сырья')]/parent::div/following-sibling::div/span/text()"
+      },
+      "processing_method": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Способ обработки')]/parent::div/following-sibling::div/span/text()"
+      },
+      "features": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Особенности')]/parent::div/following-sibling::div/span/text()"
+      },
+      "pack_type": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Вид упаковки')]/parent::div/following-sibling::div/span/text()"
+      },
+      "volume": {
+        "type": "float",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Объем')]/parent::div/following-sibling::div/span/text()"
+      },
+      "expiration_period": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[text()='Срок годности']/parent::div/following-sibling::div/span/text()"
+      },
+      "temperature": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Температура хранения')]/parent::div/following-sibling::div/span/text()"
+      },
+      "conditions": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Условия хранения')]/parent::div/following-sibling::div/span/text()"
+      },
+      "expiration_value": {
+        "type": "float",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Срок годности: значение')]/parent::div/following-sibling::div/span/text()"
+      },
+      "article_num": {
+        "type": "float",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Номер артикула')]/parent::div/following-sibling::div/span/text()"
+      },
+      "department": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Отдел в Гипермаркете')]/parent::div/following-sibling::div/span/text()"
+      },
+      "energy": {
+        "type": "float",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Энергетическая ценность')]/parent::div/following-sibling::div/span/text()"
+      },
+      "protein": {
+        "type": "float",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Белки')]/parent::div/following-sibling::div/span/text()"
+      },
+      "fats": {
+        "type": "float",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Жиры')]/parent::div/following-sibling::div/span/text()"
+      },
+      "carbohydrates": {
+        "type": "float",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Углеводы')]/parent::div/following-sibling::div/span/text()"
+      },
+      "product_type": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Вид продукта')]/parent::div/following-sibling::div/span/text()"
+      },
+      "eggs_category": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Категория яйца')]/parent::div/following-sibling::div/span/text()"
+      },
+      "eggs_cnt": {
+        "type": "float",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Количество яиц')]/parent::div/following-sibling::div/span/text()"
+      },
+      "milk_type": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Тип молока')]/parent::div/following-sibling::div/span/text()"
+      },
+      "butter_taste": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Вкус масла')]/parent::div/following-sibling::div/span/text()"
+      },
+      "additives": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Добавки')]/parent::div/following-sibling::div/span/text()"
+      },
+      "precautions": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Меры предосторожности')]/parent::div/following-sibling::div/span/text()"
+      },
+      "packing": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Фасовка')]/parent::div/following-sibling::div/span/text()"
+      },
+      "cheese_kind": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Сорт сыра')]/parent::div/following-sibling::div/span/text()"
+      },
+      "cheese_type": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Вид сыра')]/parent::div/following-sibling::div/span/text()"
+      },
+      "mayonnaise_taste": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Вкус майонеза')]/parent::div/following-sibling::div/span/text()"
+      },
+      "base": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Основа')]/parent::div/following-sibling::div/span/text()"
+      },
+      "receipt": {
+        "type": "string",
+        "path": "//div[@class='catalog-detail-table__position-title']/span[contains(text(), 'Способ приготовления')]/parent::div/following-sibling::div/span/text()"
+      },
+      "big_cat": {
+        "type": "string",
+        "path": "//div[@class='header__bread-link js-header__bread-link']/div[@class='bread']/a[3]/text()"
+      },
+      "cat": {
+        "type": "string",
+        "path": "//div[@class='header__bread-link js-header__bread-link']/div[@class='bread']/a[4]/text()"
+      },
+      "small_cat": {
+        "type": "string",
+        "path": "//div[@class='header__bread-link js-header__bread-link']/div[@class='bread']/a[5]/text()"
+      }
+    }
+  }
+}

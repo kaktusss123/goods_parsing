@@ -1,0 +1,281 @@
+{
+	"_task_id": "",
+	"_start_urls": [],
+	"_segment": "milk",
+	"_operation": "",
+	"_federal_subject": "",
+	"_source": "perekrestok",
+	"project_id": "metaspider",
+	"spider_id": "metacrawler",
+
+	"global_settings": {
+		"CONCURRENT_REQUESTS": 1000,
+		"CONCURRENT_REQUESTS_PER_DOMAIN": 1000,
+		"DOWNLOAD_TIMEOUT": 120,
+		"SPLASH_URL": "http://0.0.0.0:8050",
+		"LOG_LEVEL": "INFO",
+		"AUTOTHROTTLE_ENABLED": true,
+		"AUTOTHROTTLE_START_DELAY": 1.0,
+		"AUTOTHROTTLE_MAX_DELAY": 120,
+		"AUTOTHROTTLE_TARGET_CONCURRENCY": 1000,
+		"HTTPERROR_ALLOWED_CODES": [],
+		"RETRY_ENABLED": true,
+		"RETRY_TIMES": 60,
+		"RETRY_HTTP_CODES": [
+			500,
+			503,
+			504,
+			400,
+			403,
+			408,
+			429,
+			505,
+			404,
+			303,
+			302,
+			301,
+			511,
+			407,
+			307,
+			502
+		],
+		"ROBOTSTXT_ENABLED": false,
+		"ROBOTSTXT_OBEY": false,
+		"REDIRECT_ENABLED": true,
+		"COOKIES_ENABLED": true,
+		"CLOSESPIDER_ITEMCOUNT": 0,
+		"RANDOM_UA_TYPE": "random"
+	},
+	"methods": {
+		"crawling_type": "common",
+		"allowed_domains": [],
+		"proxy_settings": {
+			"types": [
+				"https"
+			]
+		}
+	},
+	"sitemap_urls": {
+		"start": [
+			"https://www.perekrestok.ru/catalog/moloko-syr-yaytsa"
+		],
+		"type": "pagination",
+		"target": "pagination",
+		"crawl_tree": {
+			"pagination": {
+				"targets": {
+					"pagination_2": {
+						"type": "pagination",
+						"path": "//a[contains(@class,'xf-filter__item')]/@href"
+					}
+				}
+			},
+			"pagination_2": {
+				"targets": {
+					"pagination_2": {
+						"type": "pagination",
+						"path": "(//div[contains(@class,'paginator__items')]/a[contains(@class,'active')]/following-sibling::a[1]/@href)[1]"
+					},
+					"item": {
+						"type": "item",
+						"path": "//a[contains(@class,'product-picture__link')]/@href"
+					}
+				}
+			},
+			"item": {}
+		}
+	},
+	"item_page": {
+		"fields": {
+			"brand": {
+				"type": "list to string",
+				"path": "//div[@itemprop='brand']/meta/@content"
+			},
+			"produckt_kind": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Вид')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"product_name": {
+				"type": "list to string",
+				"path": "normalize-space(//h1/text())"
+			},
+			"product_type": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Тип') and not(contains(text(),'Тип упаковки')) ]/following-sibling::td//text()[normalize-space()]"
+			},
+			"price_main": {
+				"type": "float",
+				"path": "//span[@itemprop='price']/text()",
+				"regex": "[\\d\\s.,]+",
+				"required": true
+			},
+			"price_2": {
+				"type": "float",
+				"path": "//div[contains(@class,'product-cost__current')]/@data-cost",
+				"required": true
+			},
+			"price_unit": {
+				"type": "list to string",
+				"path": "(//span[contains(@class,'fraction-text')]/text())[1]"
+			},
+			"producer": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Производитель')]/following-sibling::td//text()"
+			},
+			"country": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Страна')]/following-sibling::td//text()[normalize-space()]"
+
+			},
+			"composition": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Состав')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"standart": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Стандарт')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"pack_type": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Тип упаковки')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"packing": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Фасовка')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"expiration_period": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Срок хранения')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"temperature_min": {
+				"type": "float",
+				"path": "//th[contains(text(),'Температура хранения мин')]/following-sibling::td//text()[normalize-space()]",
+				"regex": "[\\d.,]+"
+			},
+			"temperature_max": {
+				"type": "float",
+				"path": "//th[contains(text(),'Температура хранения макс')]/following-sibling::td//text()[normalize-space()]",
+				"regex": "[\\d.,]+"
+			},
+			"expiration_value": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Срок хранения')]/following-sibling::td//text()[normalize-space()]",
+				"regex": "[\\d\\s.,]+"
+			},
+			"article_num": {
+				"type": "list to string",
+				"path": "substring-after(//span[contains(@class,'caption__article')]/text(),'Артикул')"
+			},
+			"department": {
+				"type": "list to string",
+				"path": "//meta[@content='4']/preceding-sibling::*//text()[normalize-space()]"
+			},
+			"energy": {
+				"type": "float",
+				"path": "normalize-space(//th[contains(text(),'Энергетическая ценность')]/following-sibling::td//text())",
+				"regex": "[\\d.,]+"
+			},
+			"protein": {
+				"type": "float",
+				"path": "normalize-space(//th[contains(text(),'Белки')]/following-sibling::td//text())",
+				"regex": "[\\d.,]+"
+			},
+			"fats": {
+				"type": "float",
+				"path": "//th[contains(text(),'Жиры')]/following-sibling::td//text()[normalize-space()]",
+				"regex": "[\\d.,]+"
+			},
+			"carbohydrates": {
+				"type": "float",
+				"path": "//th[contains(text(),'Углеводы')]/following-sibling::td//text()[normalize-space()]",
+				"regex": "[\\d.,]+"
+			},
+			"taste": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Вкус')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"weight": {
+				"type": "list to string",
+				"path": "normalize-space(//th[contains(text(),'Вес')]/following-sibling::td//text())"
+			},
+			"weight_max": {
+				"type": "list to string",
+				"path": "normalize-space(//th[contains(text(),'Максимальный вес')]/following-sibling::td//text())"
+			},
+			"weight_min": {
+				"type": "list to string",
+				"path": "normalize-space(//th[contains(text(),'Минимальный вес')]/following-sibling::td//text())"
+			},
+			"weight_average": {
+				"type": "list to string",
+				"path": "normalize-space(//th[contains(text(),'Средний вес')]/following-sibling::td//text())"
+			},
+			"fatness": {
+				"type": "float",
+				"path": "//th[contains(text(),'Жирность')]/following-sibling::td//text()[normalize-space()]",
+				"regex": "[\\d.,]+"
+			},
+			"descriptions": {
+				"type": "list to string",
+				"path": "normalize-space(//div[@itemprop='description']/text())"
+			},
+			"processing_method": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Способ обработки')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"additives": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Добавки')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"raw_type": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Сырье')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"volume": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Объем')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"thermal_state": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Термическое состояние')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"marking": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Маркировка')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"eggs_category": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Категория')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"eggs_cnt": {
+				"type": "float",
+				"path": "//th[contains(text(),'Кол-во в упаковке')]/following-sibling::td//text()[normalize-space()]",
+				"regex": "[\\d.,]+"
+			},
+			"color": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Цвет')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"faetures": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Особенности')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"salt": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Соленое')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"min_age": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Возраст мин')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"form": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Форма')]/following-sibling::td//text()[normalize-space()]"
+			},
+			"sort": {
+				"type": "list to string",
+				"path": "//th[contains(text(),'Сорт')]/following-sibling::td//text()[normalize-space()]"
+			}
+		}
+	}
+}

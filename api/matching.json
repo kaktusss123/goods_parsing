@@ -1,0 +1,44 @@
+{
+    "globus": {
+        "match_1": {
+            "type": "",
+            "value": ""
+        },
+        "match_2": {
+            "type": "",
+            "value": ""
+        },
+        "match_3": {
+            "type": "",
+            "value": ""
+        }
+    },
+    "utkonos": {
+        "match_1": {
+            "type": "",
+            "value": ""
+        },
+        "match_2": {
+            "type": "",
+            "value": ""
+        },
+        "match_3": {
+            "type": "",
+            "value": ""
+        }
+    },
+    "metro": {
+        "match_1": {
+            "type": "",
+            "value": ""
+        },
+        "match_2": {
+            "type": "",
+            "value": ""
+        },
+        "match_3": {
+            "type": "",
+            "value": ""
+        }
+    }
+}
